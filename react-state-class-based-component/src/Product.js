@@ -20,8 +20,7 @@ const products = [
 
 class Product extends Component {
   state = {
-    cart: [],
-    total: 0
+    cart: []
   };
   // currencyOptions = {
   //   minFractionDigits: 2,
@@ -29,14 +28,16 @@ class Product extends Component {
   // };
 
   getTotal = () => {
-    return this.state.total;
+    return this.state.cart.reduce(
+      (totalCost, item) => totalCost + item.price,
+      0
+    );
   };
 
   add = (product) => {
     console.log(product);
     this.setState((state) => ({
-      cart: [...state.cart, product.name],
-      total: state.total + product.price
+      cart: [...state.cart, product]
     }));
   };
 
@@ -44,11 +45,16 @@ class Product extends Component {
     this.setState((state) => {
       const cart = [...state.cart]; // [ 'Mango', 'Apple', 'Orange' ]
       console.log(cart);
-      cart.splice(cart.indexOf(product.name));
-      console.log(cart);
+      const productIndex = cart.findIndex(
+        (cartProduct) => cartProduct.name === product.name
+      );
+      console.log(productIndex);
+      if (productIndex < 0) {
+        return;
+      }
+      cart.splice(productIndex, 1);
       return {
-        cart,
-        total: state.total - product.price
+        cart
       };
     });
   };
