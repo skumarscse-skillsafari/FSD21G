@@ -1,3 +1,6 @@
+import { useContext, useReducer } from "react";
+import UserContext from "./UserContext";
+import { ProductContext } from "../Components/ProductMaker";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -6,7 +9,7 @@ const useStyles = createUseStyles({
     border: "none",
     cursor: "pointer"
   },
-  favourite: {
+  favorite: {
     fontSize: 20,
     position: "absolute",
     top: 10,
@@ -23,16 +26,34 @@ const useStyles = createUseStyles({
   }
 });
 
+const idReducer = (key) => key + 1;
+
 function Products({ product, name }) {
+  let user = useContext(UserContext);
+  const { setProduct } = useContext(ProductContext);
+  const [id, updateId] = useReducer(idReducer, 0);
+  console.log(user);
   const classes = useStyles();
-  const favourite = true;
+  const favorite = user.favorites.includes(name);
+  console.log(favorite);
+
+  function update() {
+    setProduct({
+      name,
+      id: `${name}-${id}`
+    });
+    updateId();
+  }
+
   return (
     <div className={classes.wrapper}>
       <h3>{name}</h3>
-      <span className={classes.favourite}>
-        {favourite ? "Favourite Product" : ""}
+      <span className={classes.favorite}>
+        {favorite ? "Favorite Product" : ""}
       </span>
-      <button className={classes.add}>{product}</button>
+      <button className={classes.add} onClick={update}>
+        {product}
+      </button>
     </div>
   );
 }

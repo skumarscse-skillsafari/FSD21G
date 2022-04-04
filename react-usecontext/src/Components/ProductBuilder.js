@@ -42,11 +42,7 @@ function ProductBuilder() {
   return (
     <div className={classes.wrapper}>
       {products.map((product, index) => (
-        <Products
-          key={product.index}
-          product={product.product}
-          name={product.name}
-        />
+        <Products key={index} product={product.product} name={product.name} />
       ))}
     </div>
   );

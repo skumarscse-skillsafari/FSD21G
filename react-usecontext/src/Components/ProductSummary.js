@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { ProductContext } from "../Components/ProductMaker";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -18,14 +20,15 @@ const useStyles = createUseStyles({
 });
 
 function ProductSummary() {
+  const { product } = useContext(ProductContext);
   const classes = useStyles();
   return (
     <div className={classes.wrapper}>
       <h2>Your Products</h2>
       <ul className={classes.list}>
-        <li>Sony</li>
-        <li>Vu</li>
-        <li>LG</li>
+        {product.map(({ name, id }) => (
+          <li key={id}>{name}</li>
+        ))}
       </ul>
     </div>
   );
