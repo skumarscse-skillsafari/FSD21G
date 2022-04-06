@@ -42,6 +42,7 @@ function Products({ product, name }) {
       name,
       id: `${name}-${id}`
     });
+    console.log({ name, id });
     updateId();
   }
 

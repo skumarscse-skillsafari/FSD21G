@@ -26,6 +26,7 @@ function ProductSummary() {
     <div className={classes.wrapper}>
       <h2>Your Products</h2>
       <ul className={classes.list}>
+        {console.log(product)}
         {product.map(({ name, id }) => (
           <li key={id}>{name}</li>
         ))}
