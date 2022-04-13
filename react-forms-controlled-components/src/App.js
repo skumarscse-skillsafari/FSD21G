@@ -2,6 +2,14 @@ import { useReducer, useState } from "react";
 import "./styles.css";
 
 function formReducer(state, event) {
+  if (event.reset) {
+    return {
+      productName: "",
+      selectedProduct: "",
+      productCount: 0,
+      giftWrap: false
+    };
+  }
   return {
     ...state,
     [event.name]: event.value
@@ -9,13 +17,21 @@ function formReducer(state, event) {
 }
 
 export default function App() {
-  const [formData, setFormData] = useReducer(formReducer, {});
+  const [formData, setFormData] = useReducer(formReducer, {
+    productName: "",
+    selectedProduct: "",
+    productCount: 0,
+    giftWrap: false
+  });
   const [submitting, setSubmitting] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
+      setFormData({
+        reset: true
+      });
       console.log(formData);
     }, 3000);
   };
