@@ -24,6 +24,7 @@ export default function App() {
     giftWrap: false
   });
   const [submitting, setSubmitting] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmitting(true);
@@ -58,16 +59,24 @@ export default function App() {
         </div>
       )}
       <form onSubmit={handleSubmit}>
-        <fieldset>
+        <fieldset disabled={submitting}>
           <label>
             <p>Product Name:</p>
-            <input name="productName" onChange={handleChange} />
+            <input
+              name="productName"
+              value={formData.productName || ""}
+              onChange={handleChange}
+            />
           </label>
         </fieldset>
-        <fieldset>
+        <fieldset disabled={submitting}>
           <label>
             <p>Select a Product:</p>
-            <select name="selectedProduct" onChange={handleChange}>
+            <select
+              name="selectedProduct"
+              value={formData.selectedProduct || ""}
+              onChange={handleChange}
+            >
               <option value="">Plese select any one</option>
               <option value="Vu">Vu</option>
               <option value="LG">LG</option>
@@ -76,14 +85,28 @@ export default function App() {
           </label>
           <label>
             <p>Count:</p>
-            <input type="number" name="productCount" onChange={handleChange} />
+            <input
+              type="number"
+              name="productCount"
+              value={formData.productCount || ""}
+              diabled={submitting}
+              onChange={handleChange}
+            />
           </label>
           <label>
             <p>Gift Wrap?</p>
-            <input type="checkbox" name="giftWrap" onChange={handleChange} />
+            <input
+              type="checkbox"
+              name="giftWrap"
+              checked={formData["giftWrap"] || false}
+              disabled={formData.selectedProduct !== "LG"}
+              onChange={handleChange}
+            />
           </label>
         </fieldset>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={submitting}>
+          Submit
+        </button>
       </form>
     </div>
   );
