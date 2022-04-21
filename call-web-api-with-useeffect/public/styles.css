@@ -1,17 +1,28 @@
-.App {
-  text-align: center;
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .home {
-  background-color: aqua;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  color: crimson;
 }
 
-.project {
-  background-color: brown;
+.about {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  color: coral;
 }
 
-ul {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+.portfolio {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  color: brown;
+}
+
+#footer {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: larger;
 }

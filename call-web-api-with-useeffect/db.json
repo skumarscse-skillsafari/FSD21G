@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "SkillSafari",
+      "designation": "Full stack developer",
+      "age": 30
+    },
+    {
+      "id": 2,
+      "name": "EduKeys",
+      "designation": "Tester",
+      "age": 25
+    },
+    {
+      "name": "John",
+      "designation": "Analyst",
+      "age": 28,
+      "id": 3
+    }
+  ]
+}
