@@ -14,11 +14,14 @@ function App() {
   console.log(userInput);
 
   useEffect(() => {
+    if(users.length && !alert) { // true && true
+      return;
+    } 
     getUsers()
       .then(items => {
         setUsers(items);
       })
-  }, [alert]);
+  }, [alert, users]);
 
   useEffect(() => {
     if(alert) {
@@ -30,15 +33,15 @@ function App() {
 
   const handleChange = (e) => {
     setUserInput(prevUserInput => {
-      if(e.target.type == 'number') {
+      if(e.target.type === 'number') {
         return {
           ...prevUserInput,
-          [e.target.name]: parseInt(e.target.value),
+          [e.target.name]: +e.target.value, // age: 18
         }
       }
       return {
         ...prevUserInput,
-        [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value, // name: 'John', designation: 'Tester' 
       }
     })
   }
