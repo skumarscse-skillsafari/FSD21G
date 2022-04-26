@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+.home {
+  background-color: aqua;
+}
+
+.project {
+  background-color: brown;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
