@@ -1,16 +1,21 @@
-import {useParams, useNavigate, Link} from 'react-router-dom';
-function Profile() {
-    let {username} = useParams(); // {username: 'john'}
+import { useParams, useNavigate } from "react-router";
+import data from '../Data/data';
+
+const Profile = () => {
+    let {userId} = useParams();
     let navigate = useNavigate();
-    console.log(navigate);
-    return (
-        <div>
-            <h2>Profile Component</h2>
-            <p>Welcome, {username}!!!</p>
-            <Link to='/profile/:username'>John</Link>
-            <button onClick={() => navigate('/')}>Go to Home Page</button>
-        </div>
-    )
+    let userProfile = data.find((user) => user.id === parseInt(userId));
+    console.log(userProfile);
+  return (
+    <div>
+        <h2>Profile Component</h2>
+        <p>Welcome, {userProfile.firstName}!!!</p>
+        <p>Your ID: {userId}</p>
+        <p>Your lastName: {userProfile.lastName}</p>
+        <p>Your age: {userProfile.age}</p>
+        <button onClick={() => navigate('/profiles')}>Go back to Profiles Page...</button>
+    </div>
+  )
 }
 
 export default Profile;

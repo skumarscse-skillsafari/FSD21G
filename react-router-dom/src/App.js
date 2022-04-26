@@ -6,6 +6,7 @@ import Footer from "./Pages/Footer";
 import PageNotFound from "./Pages/PageNotFound";
 import "./styles.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Profiles from "./Pages/Profiles";
 import Profile from "./Pages/Profile";
 
 export default function App() {
@@ -17,8 +18,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/profile/:username" element={<Profile />}/>
-          <Route path="/profile" element={<Profile />}/>
+          <Route path="/profiles" element={<Profiles />}/>
+          <Route path="/profiles/profile/:userId" element={<Profile />}/>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         <Footer />
