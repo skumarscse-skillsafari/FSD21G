@@ -1,3 +1,25 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": 1,
+      "name": "SkillSafari",
+      "email": "skillsafari@edukeys.in",
+      "contact": "9876543210",
+      "address": "Chennai"
+    },
+    {
+      "name": "Test fullname",
+      "email": "test@test.com",
+      "contact": "9876543210",
+      "address": "Test Demo Address",
+      "id": 2
+    },
+    {
+      "name": "EduKeys",
+      "email": "edukeys@skillsafari.in",
+      "contact": "9876543210",
+      "address": "Coimbatore",
+      "id": 4
+    }
+  ]
 }

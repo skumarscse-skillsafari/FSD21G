@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {Table, Container, Row, Col, Button, ButtonGroup, Form, Navbar, Toast} from 'react-bootstrap';
+import {Table, Container, Row, Col, Button, ButtonGroup, Form, FormGroup, Navbar } from 'react-bootstrap';
 import axios from 'axios';
 import {toast, ToastContainer} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +9,14 @@ const api = "http://localhost:5000/users";
 
 function App() {
   const [data, setData] = useState([]);
-
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    contact: "",
+    address: ""
+  });
+  const [userId, setUserId] = useState(null);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     loadUsers();
@@ -27,6 +34,41 @@ function App() {
       setTimeout(() => loadUsers(), 500);
     }
   }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({...formData, [name] : value }); 
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.contact || !formData.address) {
+      toast.error('Please enter all the fields.')
+    } else {
+      if (!editMode) {
+        axios.post(api, formData);
+        toast.success('Added Successfully');
+        setFormData({ name: "", email: "", contact: "", address: ""});
+        setTimeout(() => loadUsers(), 500);
+      } else {
+        axios.put(`${api}/${userId}`, formData);
+        toast.success('Updated Successfully.');
+        setFormData({ name: "", email: "", contact: "", address: ""});
+        setTimeout(() => loadUsers(), 500);
+        setUserId(null);
+        setEditMode(false);
+      }
+      
+    }
+  }
+
+  const handleUpdate = (id) => {
+    const singleUser = data.find(item => item.id === id);
+    // console.log(singleUser);
+    setFormData({...singleUser});
+    setUserId(id);
+    setEditMode(true);
+  }
   
   return (
     <>
@@ -39,7 +81,27 @@ function App() {
       <Container style={{marginTop: '70px'}}>
         <Row>
           <Col md={4}>
-            <h2>Form</h2>
+            <Form onSubmit={handleSubmit}>
+              <FormGroup>
+                <Form.Label>Name</Form.Label>
+                <Form.Control type='text' name='name' placeholder='Enter your name' value={formData.name} onChange={handleChange} />
+              </FormGroup>
+              <FormGroup>
+                <Form.Label>Email</Form.Label>
+                <Form.Control type='email' name='email' placeholder='Enter your email' value={formData.email} onChange={handleChange} />
+              </FormGroup>
+              <FormGroup>
+                <Form.Label>Contact</Form.Label>
+                <Form.Control type='text' name='contact' placeholder='Enter your contact number' value={formData.contact} onChange={handleChange} />
+              </FormGroup>
+              <FormGroup>
+                <Form.Label>Address</Form.Label>
+                <Form.Control type='text' name='address' placeholder='Enter your address' value={formData.address} onChange={handleChange} />
+              </FormGroup>
+              <div className='d-grid gap-2 mt-2'>
+                <Button type='submit' variant='primary' size='lg'>{editMode ? 'Update' : 'Submit'}</Button>
+              </div>
+            </Form>
           </Col>
           <Col md={8}>
             <Table bordered hover>
@@ -63,7 +125,7 @@ function App() {
                     <td>{item.address}</td>
                     <td>
                       <ButtonGroup>
-                        <Button style={{marginRight: '5px'}} variant='secondary'>Update</Button>
+                        <Button style={{marginRight: '5px'}} variant='secondary' onClick={() => handleUpdate(item.id)}>Update</Button>
                         <Button style={{marginLeft: '5px'}} variant='danger' onClick={() => handleDelete(item.id)}>Delete</Button>
                       </ButtonGroup>
                     </td>
