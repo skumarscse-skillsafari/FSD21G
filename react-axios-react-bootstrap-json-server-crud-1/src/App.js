@@ -5,7 +5,7 @@ import {toast, ToastContainer} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const api = "http://localhost:5000/users";
+const api = "https://fsd21g-json-server.herokuapp.com/users";
 
 function App() {
   const [data, setData] = useState([]);
