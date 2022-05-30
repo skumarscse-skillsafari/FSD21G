@@ -1,0 +1,1 @@
+Here is the content of first.txt and second.txt file: Hello, I am from first.txt. Hello, I am from second.txt.
