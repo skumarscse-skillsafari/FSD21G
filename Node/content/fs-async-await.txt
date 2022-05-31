@@ -1,0 +1,2 @@
+The content of the files first.txt and second.txt: Hello, I am from first.txt. Hello, I am from second.txt.
+The content of the files first.txt and second.txt: Hello, I am from first.txt. Hello, I am from second.txt.
