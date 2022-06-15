@@ -25,7 +25,7 @@ app.post('/login', (req, res) => {
 })
 
 // Creating single User
-app.post('/api/user', (req, res) => {
+app.post('/api/user', (req, res) => { // http://localhost:5000/api/user
     const {name} = req.body;
     if(!name) {
         return res.status(400).json({success: false, msg: 'Please enter username'});
@@ -34,12 +34,12 @@ app.post('/api/user', (req, res) => {
 });
 
 // Create a new user
-app.post('/api/postman/user', (req, res) => {
+app.post('/api/postman/user', (req, res) => {   // http://localhost:5000/api/user
     const {name} = req.body;
     if(!name) {
         return res.status(400).json({success: false, msg: 'Please enter username'});
     }
-    res.status(201).json({success: true, data: name});
+    res.status(201).json({success: true, data: [...users, name]});
 });
 
 // Get a Single User
@@ -73,9 +73,8 @@ app.delete('/api/user/:id', (req, res) => {
     if (!user) {
         return res.status(404).json({success: false, msg: `No User with id: ${id}`});
     }
-    const newUsers = users.filter((user) => {
-        user.id !== Number(id);
-    })
+    const newUsers = users.filter((user) => user.id !== Number(id) );
+    res.status(200).json({success: true, data: newUsers});
 })
 
 app.listen(5000, () => {
