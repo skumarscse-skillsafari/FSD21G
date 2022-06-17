@@ -1,9 +1,15 @@
 import express from 'express';
+import tasks from './routes/tasks.js';
 const app = express();
-import { firstName, lastName } from './testModule.js';
+
+// Add middleware
+app.use(express.json());
+
+// route : http://localhost:5000/api/v1/tasks
+app.use('/api/v1/tasks', tasks);
 
 app.get('/', (req, res) => {
-    res.send(`${firstName}, ${lastName}`);
+    res.send(`Welcome...`);
 });
 
 app.listen(5000, () => {
