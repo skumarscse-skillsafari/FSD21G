@@ -1,6 +1,8 @@
+import Task from '../models/Task.js';
 
-export const createTask = (req, res) => {
-    res.send('Create Task...');
+export const createTask = async (req, res) => {
+    const task = await Task.create(req.body);
+    res.status(201).json({ task });
 }
 
 export const getAllTasks = (req, res) => {
