@@ -8,7 +8,7 @@ import {
 } from "../controllers/postController.js";
 const router = express.Router();
 
-router.post("/", createPost); // http://localhost:5000/posts
+router.post("/add", createPost); // http://localhost:5000/posts/add
 router.get("/", getAllPosts);
 router.get("/:id", getPost);
 router.put("/:id", updatePost);
