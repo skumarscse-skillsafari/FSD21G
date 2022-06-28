@@ -11,11 +11,23 @@ const CreatePost = () => {
     date: new Date(),
     users: [],
   });
+  // console.log(post);
 
   useEffect(() => {
     axios
-      .get(" http://localhost:5000/users")
-      .then((res) => {})
+      .get("http://localhost:5000/users")
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data.users.length > 0) {
+          setPost((prevPost) => {
+            return {
+              ...prevPost,
+              users: res.data.users.map((user) => user.username),
+              username: res.data.users[0].username,
+            };
+          });
+        }
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -49,7 +61,7 @@ const CreatePost = () => {
 
     axios
       .post("http://localhost:5000/posts/add", newPost)
-      .then((res) => console.log(res))
+      .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
 
@@ -66,7 +78,13 @@ const CreatePost = () => {
             value={post.username}
             onChange={handleChange}
           >
-            <option value={post.username}>{post.username}</option>
+            {post.users.map((user, index) => {
+              return (
+                <option key={index} value={user}>
+                  {user}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="form-group">
