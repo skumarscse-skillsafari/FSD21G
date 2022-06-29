@@ -16,7 +16,7 @@ const PostsList = () => {
   const deletePost = (id) => {
     setPosts(posts.filter((post) => post._id !== id));
     axios
-      .delete(`http://localhost:5000/posts:${id}`)
+      .delete(`http://localhost:5000/posts/${id}`)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };

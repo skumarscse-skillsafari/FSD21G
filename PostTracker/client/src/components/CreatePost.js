@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CreatePost = () => {
+  const navigate = useNavigate();
   const [post, setPost] = useState({
     username: "",
     description: "",
@@ -63,6 +65,8 @@ const CreatePost = () => {
       .post("http://localhost:5000/posts/add", newPost)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
+
+    navigate("/");
   };
 
   return (

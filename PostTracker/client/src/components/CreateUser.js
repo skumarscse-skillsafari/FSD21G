@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CreateUser = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
 
   const handleChange = (e) => {
@@ -18,6 +20,8 @@ const CreateUser = () => {
       .post("http://localhost:5000/users", user)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
+    setUsername("");
+    navigate("/");
   };
   return (
     <div>
