@@ -17,7 +17,7 @@ const CreatePost = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/users")
+      .get("https://posttracker-backend.herokuapp.com/users")
       .then((res) => {
         // console.log(res.data);
         if (res.data.users.length > 0) {
@@ -62,7 +62,7 @@ const CreatePost = () => {
     };
 
     axios
-      .post("http://localhost:5000/posts/add", newPost)
+      .post("https://posttracker-backend.herokuapp.com/posts/add", newPost)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 

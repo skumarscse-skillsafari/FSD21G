@@ -8,7 +8,7 @@ const PostsList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/posts")
+      .get("https://posttracker-backend.herokuapp.com/posts")
       .then((res) => setPosts(res.data.posts))
       .catch((err) => console.log(err));
   }, []);
@@ -16,7 +16,7 @@ const PostsList = () => {
   const deletePost = (id) => {
     setPosts(posts.filter((post) => post._id !== id));
     axios
-      .delete(`http://localhost:5000/posts/${id}`)
+      .delete(`https://posttracker-backend.herokuapp.com/posts/${id}`)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };

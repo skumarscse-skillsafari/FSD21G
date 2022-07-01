@@ -18,7 +18,7 @@ const EditPost = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/posts/${id}`)
+      .get(`https://posttracker-backend.herokuapp.com/posts/${id}`)
       .then((res) => {
         setPost((prevPost) => {
           return {
@@ -33,7 +33,7 @@ const EditPost = () => {
       .catch((err) => console.log(err));
 
     axios
-      .get("http://localhost:5000/users")
+      .get("https://posttracker-backend.herokuapp.com/users")
       .then((res) => {
         // console.log(res.data);
         if (res.data.users.length > 0) {
@@ -78,7 +78,7 @@ const EditPost = () => {
     };
 
     axios
-      .put(`http://localhost:5000/posts/${id}`, newPost)
+      .put(`https://posttracker-backend.herokuapp.com/posts/${id}`, newPost)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 

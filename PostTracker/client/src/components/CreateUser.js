@@ -17,7 +17,7 @@ const CreateUser = () => {
     };
 
     axios
-      .post("http://localhost:5000/users", user)
+      .post("https://posttracker-backend.herokuapp.com/users", user)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
     setUsername("");
